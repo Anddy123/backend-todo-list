@@ -1,7 +1,7 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS todos;
+DROP TABLE IF EXISTS todos CASCADE;
 
 CREATE TABLE users (
   id INTEGER  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -13,6 +13,5 @@ CREATE TABLE todos (
   id INTEGER  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   complete BOOLEAN NOT NULL,
-  user_id INTEGER NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  user_id INTEGER NOT NULL
 );
