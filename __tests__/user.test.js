@@ -42,6 +42,24 @@ describe('user tests', () => {
     expect(res.body).toEqual({ message: 'Signed in successfully!' });
   });
 
+
+  it('returns the current user', async () => {
+    const [agent, user] = await registerAndLogin();
+    const me = await agent.get('/api/v1/users/me');
+    console.log(me.body, 'gasdfasdasdas');
+    expect(me.body).toEqual({
+      ...user,
+      exp: expect.any(Number),
+      iat: expect.any(Number),
+    });
+  });
+
+  it('DELETE /sessions deletes the user session', async () => {
+    const [agent] = await registerAndLogin();
+    const resp = await agent.delete('/api/v1/users/sessions');
+    expect(resp.status).toBe(204);
+  });
+
   afterAll(() => {
     pool.end();
   });
