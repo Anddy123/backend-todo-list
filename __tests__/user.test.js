@@ -27,7 +27,7 @@ describe('user tests', () => {
     const { email } = mockUser;
 
     expect(res.body).toEqual({
-      id: expect.any(String),
+      id: expect.any(Number),
       email,
     });
   });
