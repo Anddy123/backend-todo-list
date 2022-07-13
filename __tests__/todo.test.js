@@ -27,7 +27,6 @@ describe('todos', () => {
   
   it('POST /api/v1/todos creates a new shopping item with the current user', async () => {
     const [agent, user] = await registerAndLogin();
-  
     const resp = await agent.post('/api/v1/todos')
       .send({
         todo: 'buy milk',
@@ -35,10 +34,10 @@ describe('todos', () => {
       });
     expect(resp.status).toEqual(200);
     expect(resp.body).toEqual({
-      id: expect.any(String),
+      id: 1,
       todo: 'buy milk',
       user_id: user.id,
-      completed: false,
+      completed: false, 
     });
   });
   
@@ -79,6 +78,7 @@ describe('todos', () => {
       user_id: user.id,
     });
     const resp = await agent.delete('/api/v1/todos/1');
+    console.log(resp.body);
     expect(resp.status).toEqual(200);
   });
 
